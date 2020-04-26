@@ -30,7 +30,7 @@ int main(int argc, char* argv[]) {
 	}
 
 	//1) direct 
-	int siz[1024, 4096, 16384, 32768];
+	vector<int> siz{1024, 4096, 16384, 32768};
 	for (int z = 0; z < 4; z++) {
 		int correct = 0;
 		int blocks = siz[z] / 32;
@@ -50,7 +50,7 @@ int main(int argc, char* argv[]) {
 					correct++;
 				}
 				else {
-					cache[index] = tag
+				  cache[index] = tag;
 				}
 			}
 			if (valid[index] == 0) {
@@ -63,7 +63,7 @@ int main(int argc, char* argv[]) {
 	}
 	output << "\n";
 	//2) set associateive
-	int way[2, 4, 8, 16]; 
+	vector<int>way{2, 4, 8, 16}; 
 	for (int z = 0; z < 4; z++) {
 		int correct = 0;
 		int sets = 512 / way[z];
@@ -151,7 +151,7 @@ int main(int argc, char* argv[]) {
 		}
 		output << correct << ", " << address.size() << ";\n";
 		//hot/cold
-		else {
+		if(z==1){
 			
 		}
 	}
@@ -159,9 +159,10 @@ int main(int argc, char* argv[]) {
 
 	for (int z = 0; z < 4; z++) {
 		int correct = 0;
+		int sets = 512/way[z];
 		long long cache[sets][way[z]];
 		int lru[sets][way[z]];
-		int sets = 512 / way[z];
+	
 		for (int i = 0; i < sets; i++) {
 			for (int j = 0; j < way[z]; j++) {
 				lru[i][j] = -1;
@@ -204,9 +205,10 @@ int main(int argc, char* argv[]) {
 	//prefetch
 	for (int z = 0; z < 4; z++) {
 		int correct = 0;
+		int sets = 512 / way[z];
 		long long cache[sets][way[z]];
 		int lru[sets][way[z]];
-		int sets = 512 / way[z];
+	       
 		for (int i = 0; i < sets; i++) {
 			for (int j = 0; j < way[z]; j++) {
 				lru[i][j] = -1;
@@ -226,7 +228,7 @@ int main(int argc, char* argv[]) {
 				if (cache[set][j] == -1) {
 					cache[set][j] = tag;
 					lru[set][j] = i;
-					c = 1; ]				
+					c = 1;				
 				}
 				else if (cache[set][j] == tag) {
 					correct++;
@@ -236,7 +238,7 @@ int main(int argc, char* argv[]) {
 				if (cache[set2][j] == -1) {
 					cache[set2][j] = tag2;
 					lru[set2][j] = i;
-					c2 = 1; ]
+					c2 = 1;
 				}
 				else if (cache[set2][j] == tag2) {
 					correct++;
@@ -273,9 +275,10 @@ int main(int argc, char* argv[]) {
 	//prefetch on miss
 	for (int z = 0; z < 4; z++) {
 		int correct = 0;
+		int sets = 512 / way[z];
 		long long cache[sets][way[z]];
 		int lru[sets][way[z]];
-		int sets = 512 / way[z];
+	       
 		for (int i = 0; i < sets; i++) {
 			for (int j = 0; j < way[z]; j++) {
 				lru[i][j] = -1;
@@ -294,7 +297,7 @@ int main(int argc, char* argv[]) {
 			if (i < address.size() - 1) {
 				addr2 = address[i + 1] >> 5;
 				tag2 = addr2 / sets;
-				set2 = = addr2 % sets;
+				set2 = addr2 % sets;
 			}
 			for (int j = 0; j < way[z]; j++) {
 				if (cache[set][j] == -1) {
@@ -320,14 +323,14 @@ int main(int argc, char* argv[]) {
 				cache[set][x] = tag;
 				if (i < address.size() - 1) {
 					for (int n = 0; n < way[z]; n++) {
-						if (cache[set2][j] == -1) {
-							cache[set2][j] = tag2;
-							lru[set2][j] = i;
-							c2 = 1; ]
+						if (cache[set2][n] == -1) {
+							cache[set2][n] = tag2;
+							lru[set2][n] = i;
+							c2 = 1;
 						}
-						else if (cache[set2][j] == tag2) {
+						else if (cache[set2][n] == tag2) {
 							correct++;
-							lru[set2][j] = i;
+							lru[set2][n] = i;
 							c2 = 1;
 						}
 					}
