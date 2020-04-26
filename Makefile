@@ -1,7 +1,6 @@
-all: predictors		
-
-lab1: predictors.cpp
-	g++ -g predictors.cpp -o predictors
+all: cache-sim	
+proj2: cache-sim.cpp
+	g++ -g cache-sim.cpp -o cache-sim
 
 clean:
-	rm -rf predictors
+	rm -rf cache-sim
