@@ -81,16 +81,20 @@ int main(int argc, char* argv[]) {
 			int tag = addr1 / sets;
 			int c = 0;
 			for (int j = 0; j < way[z]; j++) {
-				if (cache[set][j] == -1) {
+			  if(c==0) {
+			   if (cache[set][j] == -1) {
 					cache[set][j] = tag;
-					lru[sets][j] = i;
+					lru[set][j] = i;
 					c = 1;
+				       
 				}
 				else if (cache[set][j] == tag) {
 					correct++;
 					lru[set][j] = i;
 					c = 1;
+					
 				}
+			  }
 			}
 			if (c == 0) {
 				int temp = lru[set][0];
@@ -123,7 +127,8 @@ int main(int argc, char* argv[]) {
 				long long addr1 = address[i] >> 5;
 				int c = 0;
 				for (int j = 0; j < blocks; j++) {
-					if (cache[j] == -1) {
+				  if(c==0) {
+				   if (cache[j] == -1) {
 						cache[j] = addr1;
 						lru[j] = i;
 						c = 1;
@@ -133,6 +138,7 @@ int main(int argc, char* argv[]) {
 						lru[j] = i;
 						c = 1;
 					}
+				  }
 				}
 				if (c == 0) {
 					int temp = lru[0];
@@ -175,6 +181,7 @@ int main(int argc, char* argv[]) {
 			int tag = addr1 / sets;
 			int c = 0;
 			for (int j = 0; j < way[z]; j++) {
+			  if(c==0) {
 				if (cache[set][j] == -1) {
 						cache[set][j] = tag;
 						lru[set][j] = i;
@@ -185,6 +192,7 @@ int main(int argc, char* argv[]) {
 					lru[set][j] = i;
 					c = 1;
 				}
+			  }
 			}
 			if (behaviors[i] == "L" && c == 0) {
 				int temp = lru[set][0];
@@ -225,7 +233,8 @@ int main(int argc, char* argv[]) {
 			int c = 0;
 			int c2 = 0;
 			for (int j = 0; j < way[z]; j++) {
-				if (cache[set][j] == -1) {
+			  if(c==0) {
+			       if (cache[set][j] == -1) {
 					cache[set][j] = tag;
 					lru[set][j] = i;
 					c = 1;				
@@ -235,6 +244,8 @@ int main(int argc, char* argv[]) {
 					lru[set][j] = i;
 					c = 1;
 				}
+			  }
+			  if(c2 ==0) {
 				if (cache[set2][j] == -1) {
 					cache[set2][j] = tag2;
 					lru[set2][j] = i;
@@ -245,6 +256,7 @@ int main(int argc, char* argv[]) {
 					lru[set2][j] = i;
 					c2 = 1;
 				}
+			  }
 			}
 			if (c == 0) {
 				int temp = lru[set][0];
@@ -300,7 +312,8 @@ int main(int argc, char* argv[]) {
 				set2 = addr2 % sets;
 			}
 			for (int j = 0; j < way[z]; j++) {
-				if (cache[set][j] == -1) {
+			  if(c==0) {
+			       if (cache[set][j] == -1) {
 					cache[set][j] = tag;
 					lru[set][j] = i;
 					c = 1; 
@@ -310,6 +323,7 @@ int main(int argc, char* argv[]) {
 					lru[set][j] = i;
 					c = 1;
 				}
+			  }
 			}
 			if (c == 0) {
 				int temp = lru[set][0];
@@ -323,6 +337,7 @@ int main(int argc, char* argv[]) {
 				cache[set][x] = tag;
 				if (i < address.size() - 1) {
 					for (int n = 0; n < way[z]; n++) {
+					  if(c2==0) {
 						if (cache[set2][n] == -1) {
 							cache[set2][n] = tag2;
 							lru[set2][n] = i;
@@ -333,6 +348,7 @@ int main(int argc, char* argv[]) {
 							lru[set2][n] = i;
 							c2 = 1;
 						}
+					  }
 					}
 					if (c2 == 0) {
 						int temp2 = lru[set2][0];
