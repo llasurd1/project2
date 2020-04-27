@@ -65,7 +65,7 @@ int main(int argc, char* argv[]) {
 	//2) set associateive
 	vector<int>way{2, 4, 8, 16}; 
 	for (int z = 0; z < 4; z++) {
-		int correct = 0;
+	  int correct = 0;
 		int sets = 512 / way[z];
 		long long cache[sets][way[z]];
 		int lru[sets][way[z]];
@@ -87,6 +87,7 @@ int main(int argc, char* argv[]) {
 					lru[set][j] = i;
 					c = 1;
 				       
+				       
 				}
 				else if (cache[set][j] == tag) {
 					correct++;
@@ -100,7 +101,7 @@ int main(int argc, char* argv[]) {
 				int temp = lru[set][0];
 				int x = 0;
 				for (int j = 0; j < way[z]; j++) {
-					if (lru[set][j] < temp) {
+					if (lru[set][j]<= temp) {
 						x = j;
 					}
 				}
