@@ -78,7 +78,7 @@ int main(int argc, char* argv[]) {
 		for (int i = 0; i < address.size(); i++) {
 			long long addr1 = address[i] >> 5;
 			int set = addr1 % sets;
-			int tag = addr1 / sets;
+			long long tag = addr1 / sets;
 			int c = 0;
 			for (int j = 0; j < way[z]; j++) {
 			  if(c==0) {
