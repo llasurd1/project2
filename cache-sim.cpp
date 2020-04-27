@@ -223,13 +223,11 @@ int main(int argc, char* argv[]) {
 				cache[i][j] = -1;
 			}
 		}
-		for (int i = 0; i < address.size()-1; i+=2) {
+		for (int i = 0; i < address.size(); i++) {
 			long long addr1 = address[i] >> 5;
 			int set = addr1 % sets;
 			int tag = addr1 / sets;
-			long long addr2 = address[i + 1] >> 5;
-			int set2 = addr2 % sets;
-			int tag2 = addr2 / sets;
+			int set2 = set+1;
 			int c = 0;
 			int c2 = 0;
 			for (int j = 0; j < way[z]; j++) {
@@ -247,12 +245,11 @@ int main(int argc, char* argv[]) {
 			  }
 			  if(c2 ==0) {
 				if (cache[set2][j] == -1) {
-					cache[set2][j] = tag2;
+					cache[set2][j] = tag;
 					lru[set2][j] = i;
 					c2 = 1;
 				}
-				else if (cache[set2][j] == tag2) {
-					correct++;
+				else if (cache[set2][j] == tag) {
 					lru[set2][j] = i;
 					c2 = 1;
 				}
@@ -278,7 +275,7 @@ int main(int argc, char* argv[]) {
 					}
 				}
 				lru[set2][x] = i;
-				cache[set2][x] = tag2;
+				cache[set2][x] = tag;
 			}
 		}
 		output << correct << ", " << address.size() << ";	";
