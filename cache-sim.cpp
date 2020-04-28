@@ -84,13 +84,6 @@ int main(int argc, char* argv[]) {
 			int set = addr1 % sets;
 			long long tag = addr1 / sets;
 			int c = 0;
-			if(i<3) {
-			  cout << way[z] << " : way\n";
-			  cout <<  address[i] << " :address\n";
-			  cout << addr1 << " :bit shifted address\n";
-			  cout << tag << " :tag\n";
-			  cout << set << " :set\n";
-			}
 			for (int j = 0; j < way[z]; j++) {
 			  if(c==0) {
 			   if (cache[set][j] == -1) {
@@ -191,11 +184,11 @@ int main(int argc, char* argv[]) {
 		for (int i = 0; i < address.size(); i++) {
 			long long addr1 = address[i] >> 5;
 			int set = addr1 % sets;
-			int tag = addr1 / sets;
+			long long tag = addr1 / sets;
 			int c = 0;
 			for (int j = 0; j < way[z]; j++) {
 			  if(c==0) {
-				if (cache[set][j] == -1) {
+				if (cache[set][j] == -1 && behaviors[i] == "L") {
 						cache[set][j] = tag;
 						lru[set][j] = i;
 						c = 1; 
@@ -240,7 +233,7 @@ int main(int argc, char* argv[]) {
 		for (int i = 0; i < address.size(); i++) {
 			long long addr1 = address[i] >> 5;
 			int set = addr1 % sets;
-			int tag = addr1 / sets;
+		        long long tag = addr1 / sets;
 			int set2 = set+1;
 			int c = 0;
 			int c2 = 0;
