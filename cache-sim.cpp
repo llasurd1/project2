@@ -42,6 +42,8 @@ int main(int argc, char* argv[]) {
 			valid[i] = 0;
 		}
 		for (int i = 0; i < address.size(); i++) {
+		 
+		 
 			long long addr1 = address[i] >> 5;
 			int index = addr1 % blocks;
 			int tag = addr1 / blocks;
@@ -76,10 +78,19 @@ int main(int argc, char* argv[]) {
 			}
 		}
 		for (int i = 0; i < address.size(); i++) {
+		  
+		 
 			long long addr1 = address[i] >> 5;
 			int set = addr1 % sets;
 			long long tag = addr1 / sets;
 			int c = 0;
+			if(i<3) {
+			  cout << way[z] << " : way\n";
+			  cout <<  address[i] << " :address\n";
+			  cout << addr1 << " :bit shifted address\n";
+			  cout << tag << " :tag\n";
+			  cout << set << " :set\n";
+			}
 			for (int j = 0; j < way[z]; j++) {
 			  if(c==0) {
 			   if (cache[set][j] == -1) {
@@ -102,6 +113,7 @@ int main(int argc, char* argv[]) {
 				int x = 0;
 				for (int j = 0; j < way[z]; j++) {
 					if (lru[set][j]<= temp) {
+					  temp = lru[set][j];
 						x = j;
 					}
 				}
@@ -200,7 +212,8 @@ int main(int argc, char* argv[]) {
 				int x = 0;
 				for (int j = 0; j < way[z]; j++) {
 					if (lru[set][j] < temp) {
-						x = j;
+					  temp = lru[set][j];
+					  x = j;
 					}
 				}
 				lru[set][x] = i;
@@ -262,6 +275,7 @@ int main(int argc, char* argv[]) {
 				for (int j = 0; j < way[z]; j++) {
 					if (lru[set][j] < temp) {
 						x = j;
+						temp = lru[set][j];
 					}
 				}
 				lru[set][x] = i;
@@ -272,6 +286,7 @@ int main(int argc, char* argv[]) {
 				int x = 0;
 				for (int j = 0; j < way[z]; j++) {
 					if (lru[set2][j] < temp) {
+					  temp = lru[set2][j];
 						x = j;
 					}
 				}
@@ -329,6 +344,7 @@ int main(int argc, char* argv[]) {
 				for (int j = 0; j < way[z]; j++) {
 					if (lru[set][j] < temp) {
 						x = j;
+						temp = lru[set][j];
 					}
 				}
 				lru[set][x] = i;
@@ -354,6 +370,7 @@ int main(int argc, char* argv[]) {
 						for (int j2 = 0; j2 < way[z]; j2++) {
 							if (lru[set2][j2] < temp2) {
 								x2 = j2;
+								temp2 = lru[set2][j2];
 							}
 						}
 						lru[set2][x2] = i;
