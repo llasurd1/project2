@@ -308,10 +308,10 @@ int main(int argc, char* argv[]) {
 		for (int i = 0; i < address.size(); i++) {
 			long long addr1 = address[i] >> 5;
 			int set = addr1 % sets;
-			int tag = addr1 / sets;
+			long long tag = addr1 / sets;
 			long long addr2 = (address[i] + 32) >> 5;
 			int set2 = addr2 % sets;
-			int tag2 = addr2 / sets;
+			long long tag2 = addr2 / sets;
 			int c = 0;
 			int c2 = 0;
 		     
@@ -341,7 +341,7 @@ int main(int argc, char* argv[]) {
 				lru[set][x] = i;
 				cache[set][x] = tag;
 			}
-			if(c < 2) {
+			if(c == 0 || c == 1) {
 				for (int n = 0; n < way[z]; n++) {
 					  if(c2==0) {
 						if (cache[set2][n] == -1) {
@@ -350,13 +350,14 @@ int main(int argc, char* argv[]) {
 							c2 = 1;
 						}
 						else if (cache[set2][n] == tag2) {
-							correct++;
+						       
 							lru[set2][n] = i;
 							c2 = 1;
 						}
 					 
 					}
-					if (c2 == 0) {
+				}
+				if (c2 == 0) {
 						int temp2 = lru[set2][0];
 						int x2 = 0;
 						for (int j2 = 0; j2 < way[z]; j2++) {
@@ -367,8 +368,9 @@ int main(int argc, char* argv[]) {
 						}
 						lru[set2][x2] = i;
 						cache[set2][x2] = tag2;
-					}
 				}
+			
+				
 			}
 		}
 		output << correct << ", " << address.size() << ";	";
