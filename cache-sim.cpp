@@ -325,7 +325,7 @@ int main(int argc, char* argv[]) {
 				else if (cache[set][j] == tag) {
 					correct++;
 					lru[set][j] = i;
-					c = 1;
+					c = 2;
 				}
 			  }
 			}
@@ -340,7 +340,9 @@ int main(int argc, char* argv[]) {
 				}
 				lru[set][x] = i;
 				cache[set][x] = tag;
-					for (int n = 0; n < way[z]; n++) {
+			}
+			if(c < 2) {
+				for (int n = 0; n < way[z]; n++) {
 					  if(c2==0) {
 						if (cache[set2][n] == -1) {
 							cache[set2][n] = tag2;
